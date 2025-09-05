@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保護者面談 予約システム 取扱説明書</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin: 0;
+        }
+        h2 {
+            color: #34495e;
+            font-size: 1.6em;
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+        p, li {
+            font-size: 1em;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: 1px solid #3498db;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .nav a:hover {
+            background-color: #3498db;
+            color: #fff;
+            text-decoration: none;
+        }
+        .manual-section {
+            margin-bottom: 50px;
+        }
+        .step {
+            background-color: #fdfdfd;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .step-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        ol, ul {
+            padding-left: 25px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        code {
+            background-color: #e8f4fd;
+            color: #2c3e50;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.9em;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .example-box {
+            background-color: #f7f9fc;
+            border: 1px dashed #ced4da;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .example-box table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .example-box th, .example-box td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .example-box th {
+            background-color: #e9ecef;
+        }
+        .notice {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 5px solid;
+        }
+        .notice-info {
+            background-color: #e8f4fd;
+            border-color: #3498db;
+        }
+        .notice-warning {
+            background-color: #fffbe6;
+            border-color: #f1c40f;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.4em; }
+            h3 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>保護者面談 予約システム</h1>
+            <p>取扱説明書・ご利用案内</p>
+        </div>
+
+        <div class="nav">
+            <a href="#for-teachers">教師用 取扱説明書</a>
+            <a href="#for-parents">保護者用 ご利用案内</a>
+        </div>
+
+        <!-- ====================================================== -->
+        <!-- 教師用 取扱説明書 -->
+        <!-- ====================================================== -->
+        <div class="manual-section" id="for-teachers">
+            <h2>【教師用】取扱説明書</h2>
+            <p>この説明書は、本システムを管理・運用する先生方向けのものです。初期設定から日々の運用方法までを解説します。</p>
+
+            <h3>1. はじめに</h3>
+            <p>このシステムは、Googleスプレッドシートを利用して、保護者面談の予約受付を自動化するツールです。</p>
+            <ul>
+                <li><strong>Webページで24時間予約受付</strong>: 保護者はいつでもどこでも予約ができます。</li>
+                <li><strong>リアルタイムで状況把握</strong>: 予約状況はスプレッドシートに即時反映され、一元管理できます。</li>
+                <li><strong>業務の効率化</strong>: 予約・キャンセル・リマインダーのメールが自動送信され、連絡の手間が省けます。</li>
+            </ul>
+
+            <h3>2. 準備編：システムの初期設定</h3>
+            <p>システムを利用するためには、いくつかの初期設定が必要です。</p>
+
+            <div class="step">
+                <div class="step-title">Step 1: スプレッドシートとスクリプトの準備</div>
+                <ol>
+                    <li>新しいGoogleスプレッドシートを作成し、分かりやすい名前（例：「令和〇年度 保護者面談予約」）を付けます。</li>
+                    <li>メニューから「拡張機能」>「Apps Script」を選択し、スクリプトエディタを開きます。</li>
+                    <li>エディタに表示されている <code>Code.gs</code> の中身をすべて削除し、提供された <code>Code.gs</code> のコードを貼り付けて保存します。</li>
+                    <li>「ファイル」の横にある「+」をクリックして「HTML」を選択し、ファイル名を <code>index</code> として <code>index.html</code> ファイルを作成します。</li>
+                    <li>作成した <code>index.html</code> の中身をすべて削除し、提供された <code>index.html</code> のコードを貼り付けて保存します。</li>
+                </ol>
+            </div>
+
+            <div class="step">
+                <div class="step-title">Step 2: 予約表シートの作成</div>
+                <p>予約を受け付けたいクラスごとに、スプレッドシートにシートを作成します。</p>
+                <ol>
+                    <li><strong>シート名のルール</strong>: シート名は必ず「<span class="highlight">予約表</span>」で終わるようにしてください。（例：<code>1年1組予約表</code>、<code>ひまわり組予約表</code>）</li>
+                    <li><strong>シートのフォーマット</strong>:
+                        <ul>
+                            <li><strong>A1セル</strong>: 教師名（クラス名も併記すると分かりやすいです）。例: <code>1年1組 担任 鈴木</code></li>
+                            <li><strong>1行目 (B列以降)</strong>: 面談を行う日付。例: <code>7/23</code>, <code>7/24</code></li>
+                            <li><strong>A列 (2行目以降)</strong>: 面談の時間帯。例: <code>09:00～09:15</code></li>
+                            <li><strong>予約を受け付けない時間</strong>: 予約枠として使用しないセルには「<span class="highlight">予約不可</span>」と入力してください。</li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="example-box">
+                    <strong>【記入例】</strong>
+                    <table>
+                        <thead>
+                            <tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>1</strong></td><td>1年1組 担任 鈴木</td><td>7/23</td><td>7/24</td><td>7/25</td></tr>
+                            <tr><td><strong>2</strong></td><td>09:00～09:15</td><td></td><td></td><td></td></tr>
+                            <tr><td><strong>3</strong></td><td>09:20～09:35</td><td></td><td>予約不可</td><td></td></tr>
+                            <tr><td><strong>4</strong></td><td>09:40～09:55</td><td></td><td></td><td></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-title">Step 3: 「設定」シートの入力とWebアプリの公開</div>
+                 <ol>
+                    <li>スクリプトエディタで、上部の関数選択メニューから <code>doGet</code> を選び、▶（実行）ボタンを押します。初回実行時に認証を求められるので、許可してください。</li>
+                    <li>実行後、スプレッドシートに戻ると「<strong>設定</strong>」と「<strong>予約履歴</strong>」シートが自動で作成されています。</li>
+                    <li><strong>Webアプリとしてデプロイ（公開）します。</strong>
+                        <ol type="a">
+                            <li>スクリプトエディタ右上の「<strong>デプロイ</strong>」>「<strong>新しいデプロイ</strong>」を選択します。</li>
+                            <li>「種類の選択」で歯車アイコンをクリックし、「<strong>ウェブアプリ</strong>」を選択します。</li>
+                            <li>「アクセスできるユーザー」を「<span class="highlight">全員</span>」に変更します。</li>
+                            <li>「デプロイ」ボタンを押します。</li>
+                            <li>表示された<strong>ウェブアプリURL</strong>をコピーします。<strong>これが保護者に案内するURLになります。</strong></li>
+                        </ol>
+                    </li>
+                    <li>スプレッドシートの「<strong>設定</strong>」シートを開き、以下の項目を貴校の運用に合わせて編集します。
+                        <ul>
+                            <li><strong>B1セル (予約受付開始日時)</strong>: 保護者が予約を開始できる日時。</li>
+                            <li><strong>B2セル (予約受付終了日時)</strong>: 予約を締め切る日時。</li>
+                            <li><strong>B10セル (予約システムURL)</strong>: 先ほどコピーした<strong>ウェブアプリURL</strong>をここに貼り付けます。</li>
+                            <li><strong>B12セル (重複予約禁止)</strong>: 同じメールアドレスで同じクラスの予約を1件に制限したい場合は、チェックボックスをオン（✓）にします。</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+            
+            <h3>3. 運用編：日々の使い方</h3>
+            <ul>
+                <li><strong>予約状況の確認</strong>: 各クラスの予約表シートや「予約履歴」シートでリアルタイムに状況を確認できます。</li>
+                <li><strong>手動での予約変更</strong>: 保護者から電話などで変更依頼があった場合は、スプレッドシートの該当セルを直接編集してください。その際、「予約履歴」シートのステータスも手動で変更すると記録が正確になります。</li>
+            </ul>
+
+            <div class="notice notice-info">
+                <strong>リマインダーメールの設定（推奨）</strong><br>
+                面談当日の朝、予約者にリマインダーメールを自動送信できます。<br>
+                スクリプトエディタの「トリガー」から、関数<code>sendReminderEmails</code>を「時間主導型」「日付ベースのタイマー」「午前 8 時～ 9 時」で設定してください。
+            </div>
+
+            <h3>4. よくある質問</h3>
+            <dl>
+                <dt><strong>Q. クラスを追加したいのですが？</strong></dt>
+                <dd>A. スプレッドシートに新しいシートを追加し、名前を「〇〇予約表」にしてフォーマット通りに記入すれば、自動的に予約ページの選択肢に追加されます。</dd>
+                <dt><strong>Q. 予約表のフォーマットを間違えたら？</strong></dt>
+                <dd>A. A1セル（教師名）や1行目の日付、A列の時間帯などが空欄だと、保護者側のページでエラーが表示されます。記入例を参考に正しく入力してください。</dd>
+                 <dt><strong>Q. 「設定」シートを消してしまいました。</strong></dt>
+                <dd>A. スクリプトエディタで <code>doGet</code> 関数を再度実行すれば、シートは自動で再作成されます。ただし、入力した設定値は消えてしまうので再入力が必要です。</dd>
+            </dl>
+        </div>
+
+        <!-- ====================================================== -->
+        <!-- 保護者用 ご利用案内 -->
+        <!-- ====================================================== -->
+        <div class="manual-section" id="for-parents">
+            <h2>【保護者用】ご利用案内</h2>
+            <p>このご案内は、オンラインで保護者面談の予約・キャンセルを行うための手順を説明するものです。</p>
+
+            <h3>◆ 予約の手順</h3>
+            <p>パソコン、スマートフォン、タブレットから24時間いつでもご予約いただけます。</p>
+            <ol>
+                <li><strong>予約ページにアクセス</strong><br>学校から案内されたURLにアクセスしてください。<br>（例: <code>https://script.google.com/macros/s/..../exec</code>）</li>
+                <li><strong>クラスを選択</strong><br>「クラスを選択してください」というドロップダウンメニューから、お子様のクラスを選択してください。</li>
+                <li><strong>ご希望の時間を選択</strong><br>選択したクラスの予約状況が表で表示されます。<br><span style="background-color: #e8f5e9; color: #2e7d32; padding: 2px 5px; border-radius: 3px; font-weight: bold;">「空き」</span>と表示されている中から、ご希望の時間帯をクリック（タップ）してください。</li>
+                <li><strong>予約者情報を入力</strong><br>画面の下に予約フォームが表示されますので、「お子様の名前」「保護者様の名前」「メールアドレス」を正確に入力してください。<br><span class="notice notice-warning">※予約完了メールなど、重要なお知らせが届きますので、メールアドレスは間違いのないようご入力ください。</span></li>
+                <li><strong>予約を確定する</strong><br>入力内容を確認後、「<strong>予約する</strong>」ボタンを押してください。<br>「予約が完了しました」というメッセージと<strong>予約ID</strong>が表示されたら、予約手続きは完了です。</li>
+            </ol>
+            
+            <h3>◆ 予約内容の確認</h3>
+            <p>予約が完了すると、入力いただいたメールアドレス宛に「予約完了のお知らせ」という件名のメールが自動で届きます。このメールには、ご予約内容と、キャンセル時に必要となる「<strong>予約ID</strong>」が記載されていますので、面談が終わるまで大切に保管してください。</p>
+
+            <h3>◆ 予約のキャンセル手順</h3>
+            <p>ご都合が悪くなった場合は、以下の手順でご自身で予約をキャンセルできます。</p>
+            <ol>
+                <li><strong>予約ページに再度アクセス</strong>し、ページ下部の「<strong>予約キャンセル</strong>」フォームを表示します。</li>
+                <li>以下の2点を入力します。
+                    <ul>
+                        <li><strong>登録したメールアドレス</strong>: 予約時に使用したメールアドレス</li>
+                        <li><strong>予約ID</strong>: 予約完了メールに記載されているID（例: <code>RES...</code>）</li>
+                    </ul>
+                </li>
+                <li>「<strong>予約をキャンセルする</strong>」ボタンを押してください。「予約をキャンセルしました」というメッセージが表示されれば、手続きは完了です。</li>
+            </ol>
+
+            <div class="notice notice-info">
+                <strong>【予約内容を変更したい場合】</strong><br>
+                お手数ですが、一度現在の予約を上記の手順で<strong>キャンセル</strong>していただいた後、再度ご希望の時間で<strong>予約を取り直し</strong>てください。
+            </div>
+
+            <p style="margin-top: 30px; text-align: center;">ご不明な点がございましたら、学校の担当者までご連絡ください。</p>
+        </div>
+    </div>
+
+</body>
+</html>
